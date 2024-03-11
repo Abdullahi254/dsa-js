@@ -66,6 +66,7 @@ class DoublyLinkedList {
         this.head = secondNode
         this.length -= 1;
     }
+    // adding a new node from the start of the lists
     unshift(val) {
         // if list is empty apply push method
         if (!this.head) {
