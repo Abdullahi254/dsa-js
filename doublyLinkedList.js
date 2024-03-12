@@ -83,6 +83,22 @@ class DoublyLinkedList {
             this.length += 1
         }
     }
+    reverse() {
+        // changing head to be tail and tail to be head
+        let node = this.tail
+        this.tail = this.head
+        this.head = node
+        let next;
+        let prev = null
+        for (let i = 0; i < this.length; i++) {
+            next = node.prev 
+            node.next = next
+            node.prev = prev
+            // seting up next iteration
+            prev = node
+            node = next
+        }
+    }
     traverse() {
         let current = this.head
         while (current) {
@@ -98,7 +114,7 @@ myList.push(2)
 myList.push(3)
 myList.push(4)
 // myList.shift()
-myList.unshift(78)
+myList.reverse()
 myList.traverse()
 // myList.pop()
 // console.log("****************")
