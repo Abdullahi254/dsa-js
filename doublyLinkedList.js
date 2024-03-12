@@ -83,6 +83,24 @@ class DoublyLinkedList {
             this.length += 1
         }
     }
+    get(index){
+        // returning null if index is out of range
+        if(index >= this.length || index < 0) return null
+        // creating 2 starting points in the loop to cut time complexity down by half
+        let pointer1 = this.head
+        let pointer2 = this.tail
+        let counter = 0
+        let counter2 = this.length-1
+        // if index is equal to counter the node has been found
+        while(index != counter && index !=counter2){
+            pointer1 = pointer1.next
+            pointer2 = pointer2.prev
+            counter+=1
+            counter2-=1
+        }
+        if(index == counter) return pointer1.val
+        if(index == counter2) return pointer2.val
+    }
     reverse() {
         // changing head to be tail and tail to be head
         let node = this.tail
@@ -114,8 +132,9 @@ myList.push(2)
 myList.push(3)
 myList.push(4)
 // myList.shift()
-myList.reverse()
-myList.traverse()
+// myList.reverse()
+console.log(myList.get(0))
+// myList.traverse()
 // myList.pop()
 // console.log("****************")
 // myList.traverse()
