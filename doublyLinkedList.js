@@ -83,23 +83,48 @@ class DoublyLinkedList {
             this.length += 1
         }
     }
-    get(index){
+    get(index) {
         // returning null if index is out of range
-        if(index >= this.length || index < 0) return null
+        if (index >= this.length || index < 0) return null
         // creating 2 starting points in the loop to cut time complexity down by half
         let pointer1 = this.head
         let pointer2 = this.tail
         let counter = 0
-        let counter2 = this.length-1
+        let counter2 = this.length - 1
         // if index is equal to counter the node has been found
-        while(index != counter && index !=counter2){
+        while (index != counter && index != counter2) {
             pointer1 = pointer1.next
             pointer2 = pointer2.prev
-            counter+=1
-            counter2-=1
+            counter += 1
+            counter2 -= 1
         }
-        if(index == counter) return pointer1.val
-        if(index == counter2) return pointer2.val
+        if (index == counter) return pointer1.val
+        if (index == counter2) return pointer2.val
+    }
+    // replacing a value 
+    set(index, val) {
+        // returning null if index is out of range
+        if (index >= this.length || index < 0) return null
+        // creating 2 starting points in the loop to cut time complexity down by half
+        let pointer1 = this.head
+        let pointer2 = this.tail
+        let counter = 0
+        let counter2 = this.length - 1
+        // if index is equal to counter or counter2 the node has been found
+        while (index != counter && index != counter2) {
+            pointer1 = pointer1.next
+            pointer2 = pointer2.prev
+            counter += 1
+            counter2 -= 1
+        }
+        if (index == counter) {
+            pointer1.val = val
+            return
+        }
+        if (index == counter2) {
+            pointer2.val = val
+            return
+        }
     }
     reverse() {
         // changing head to be tail and tail to be head
@@ -109,7 +134,7 @@ class DoublyLinkedList {
         let next;
         let prev = null
         for (let i = 0; i < this.length; i++) {
-            next = node.prev 
+            next = node.prev
             node.next = next
             node.prev = prev
             // seting up next iteration
@@ -133,8 +158,9 @@ myList.push(3)
 myList.push(4)
 // myList.shift()
 // myList.reverse()
-console.log(myList.get(0))
-// myList.traverse()
+// console.log(myList.get(0))
+myList.set(0,23)
+myList.traverse()
 // myList.pop()
 // console.log("****************")
 // myList.traverse()
