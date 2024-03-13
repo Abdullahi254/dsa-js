@@ -126,6 +126,34 @@ class DoublyLinkedList {
             return
         }
     }
+    insert(index, val){
+        // if index is 0 return unshift
+        if(index === 0){
+            return this.unshift(val)
+        }
+        // if index is equal to length return push
+        if(index === this.length){
+            return this.push(val)
+        }
+        // index out of range
+        if (index > this.length || index < 0){
+            return false
+        }
+        let newNode = new Node(val)
+        // get the previous node
+        let prevNode = this.get(index-1)
+        // get the current node
+        let currentNode = prevNode.next
+        // set the next of new node to current
+        newNode.next = currentNode
+        // set the previous of new Node to previous node
+        newNode.prev = prevNode
+        // set the next of prevNode to new node
+        prevNode.next = newNode
+        // set the prev of current node to new node
+        currentNode.prev = newNode
+        this.length+=1
+    }
     reverse() {
         // changing head to be tail and tail to be head
         let node = this.tail
@@ -159,7 +187,7 @@ myList.push(4)
 // myList.shift()
 // myList.reverse()
 // console.log(myList.get(0))
-myList.insert(3, 23)
+myList.insert(1, 23)
 myList.traverse()
 // myList.pop()
 // console.log("****************")
