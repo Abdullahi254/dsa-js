@@ -98,8 +98,8 @@ class DoublyLinkedList {
             counter += 1
             counter2 -= 1
         }
-        if (index == counter) return pointer1.val
-        if (index == counter2) return pointer2.val
+        if (index == counter) return pointer1
+        if (index == counter2) return pointer2
     }
     // replacing a value 
     set(index, val) {
@@ -159,7 +159,7 @@ myList.push(4)
 // myList.shift()
 // myList.reverse()
 // console.log(myList.get(0))
-myList.set(0,23)
+myList.insert(3, 23)
 myList.traverse()
 // myList.pop()
 // console.log("****************")
