@@ -126,22 +126,22 @@ class DoublyLinkedList {
             return
         }
     }
-    insert(index, val){
+    insert(index, val) {
         // if index is 0 return unshift
-        if(index === 0){
+        if (index === 0) {
             return this.unshift(val)
         }
         // if index is equal to length return push
-        if(index === this.length){
+        if (index === this.length) {
             return this.push(val)
         }
         // index out of range
-        if (index > this.length || index < 0){
+        if (index > this.length || index < 0) {
             return false
         }
         let newNode = new Node(val)
         // get the previous node
-        let prevNode = this.get(index-1)
+        let prevNode = this.get(index - 1)
         // get the current node
         let currentNode = prevNode.next
         // set the next of new node to current
@@ -152,7 +152,35 @@ class DoublyLinkedList {
         prevNode.next = newNode
         // set the prev of current node to new node
         currentNode.prev = newNode
-        this.length+=1
+        this.length += 1
+    }
+    remove(index) {
+        // if index is 0 return shift
+        if (index === 0) {
+            return this.shift()
+        }
+        // if index is equal to length return pop
+        if (index === this.length - 1) {
+            return this.pop()
+        }
+        // index out of range
+        if (index >= this.length || index < 0) {
+            return false
+        }
+        // get the node b4 the one to be removed
+        let prevNode = this.get(index - 1)
+        // get the node that is to be deleted
+        let toBeDelNode = prevNode.next
+        // get the node after the one to be deleted
+        let afterNode = toBeDelNode.next
+        // overwrite the next of prevNode with the afterNode
+        prevNode.next = afterNode
+        // overwrite the prev of the afterNode
+        afterNode.prev = prevNode
+        // completely remove any link of del node to the list
+        toBeDelNode.prev = null
+        toBeDelNode.next = null
+        this.length -= 1
     }
     reverse() {
         // changing head to be tail and tail to be head
@@ -187,7 +215,8 @@ myList.push(4)
 // myList.shift()
 // myList.reverse()
 // console.log(myList.get(0))
-myList.insert(1, 23)
+// myList.insert(1, 23)
+myList.remove(1)
 myList.traverse()
 // myList.pop()
 // console.log("****************")
