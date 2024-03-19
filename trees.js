@@ -26,7 +26,7 @@ class BST {
                         // if there's a next right node overwrite node with it
                         node = node.right
                     }
-                        // no right so this is the slot for our new node
+                    // no right so this is the slot for our new node
                     else {
                         node.right = newNode
                         return this
@@ -45,6 +45,24 @@ class BST {
             }
         }
     }
+    find(val) {
+        let node = this.root
+        while (node) {
+            // if node is found return true
+            if (node.val === val) return true
+            // check the right
+            if (val > node.val) {
+                if (node.right) {
+                    node = node.right
+                } else return false
+            // check the left
+            } else {
+                if (node.left) {
+                    node = node.left
+                } else return false
+            }
+        }
+    }
 }
 
 const myBst = new BST()
@@ -58,3 +76,4 @@ myBst.insert(15)
 myBst.insert(8)
 myBst.insert(21)
 myBst.insert(42)
+console.log(myBst.find(8))
