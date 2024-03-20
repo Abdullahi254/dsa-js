@@ -63,17 +63,36 @@ class BST {
             }
         }
     }
+    transverse(){
+        let q = [this.root]
+        let visited = []
+        let node;
+        while(q.length > 0){
+            node = q.shift()
+            if(node.left){
+                q.push(node.left)
+            }
+            if(node.right){
+                q.push(node.right)
+            }
+            visited.push(node.val)
+        }
+        return visited
+    }
 }
 
 const myBst = new BST()
-myBst.insert(12)
+myBst.insert(10)
 myBst.insert(6)
-myBst.insert(5)
-myBst.insert(4)
-myBst.insert(17)
-myBst.insert(11)
 myBst.insert(15)
+myBst.insert(3)
 myBst.insert(8)
-myBst.insert(21)
-myBst.insert(42)
-console.log(myBst.find(8))
+myBst.insert(20)
+
+// console.log(myBst.find(8))
+console.log(myBst.transverse())
+
+// insertion - O(logn)
+// search - O(logn)
+// as the tree doubles we only increase the number of steps by 1
+// worst case is O(n) 
