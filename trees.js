@@ -6,6 +6,54 @@ class Node {
     }
 }
 
+class QNode {
+    constructor(val) {
+        this.val = val
+        this.next = null
+    }
+}
+
+class Q {
+    constructor() {
+        this.first = null
+        this.last = null
+        this.length = 0
+    }
+    // pushing the nodes to the end when new one is added
+    enqueue(val) {
+        let newNode = new QNode(val)
+        if (this.length === 0) {
+            this.first = newNode
+            this.last = this.first
+        }
+        else {
+            this.last.next = newNode
+            //overwriting the last node to be the new node added
+            this.last = newNode
+        }
+        this.length += 1
+    }
+    // removing the nodes added first in the queue
+    dequeue() {
+        if (this.length < 1) {
+            return null
+        }
+        if (this.length === 1) {
+            let node = this.first
+            this.first = null
+            this.last = null
+            this.length -= 1
+            return node.val
+        } else {
+            let node = this.first
+            this.first = this.first.next
+            this.length -= 1
+            return node.val
+        }   
+    }
+}
+
+
 class BST {
     constructor() {
         this.root = null
@@ -64,6 +112,7 @@ class BST {
         }
     }
     transverse(){
+        // using array to transverse a BST for demostration purposes
         let q = [this.root]
         let visited = []
         let node;
@@ -79,6 +128,30 @@ class BST {
         }
         return visited
     }
+    transverse2(){
+        // using queue to transverse a BST
+        let q = new Q()
+        //adding first node to queue
+        q.enqueue(this.root)
+        // visited queue will have a list of all the nodes
+        let visited = new Q()
+        //declaring node that will be used in the loop to catch each node in each iteration
+        let node;
+        while(q.length > 0){
+            // grabing nodes from the queue and decreasing the queue length in each iteration
+            node = q.dequeue()
+            // if child node exists add it to the queue
+            if(node.left){
+                q.enqueue(node.left)
+            }
+            if(node.right){
+                q.enqueue(node.right)
+            }
+            // filling in the nodes in each iteration
+            visited.enqueue(node)
+        }
+        return visited
+    }
 }
 
 const myBst = new BST()
@@ -90,7 +163,7 @@ myBst.insert(8)
 myBst.insert(20)
 
 // console.log(myBst.find(8))
-console.log(myBst.transverse())
+console.log(myBst.transverse2())
 
 // insertion - O(logn)
 // search - O(logn)
