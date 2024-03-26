@@ -112,7 +112,7 @@ class BST {
         }
     }
     transverse(){
-        // using array to transverse a BST for demostration purposes
+        // using bredth first method(using array to transverse a BST for demostration purposes)
         let q = [this.root]
         let visited = []
         let node;
@@ -129,7 +129,7 @@ class BST {
         return visited
     }
     transverse2(){
-        // using queue to transverse a BST
+        // using bredth first method(using queue to transverse a BST)
         let q = new Q()
         //adding first node to queue
         q.enqueue(this.root)
@@ -140,7 +140,7 @@ class BST {
         while(q.length > 0){
             // grabing nodes from the queue and decreasing the queue length in each iteration
             node = q.dequeue()
-            // if child node exists add it to the queue
+            // if child node exists push it to the queue
             if(node.left){
                 q.enqueue(node.left)
             }
