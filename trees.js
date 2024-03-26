@@ -111,7 +111,7 @@ class BST {
             }
         }
     }
-    transverse(){
+    traverse(){
         // using bredth first method(using array to transverse a BST for demostration purposes)
         let q = [this.root]
         let visited = []
@@ -128,7 +128,7 @@ class BST {
         }
         return visited
     }
-    transverse2(){
+    traverse2(){
         // using bredth first method(using queue to transverse a BST)
         let q = new Q()
         //adding first node to queue
@@ -152,6 +152,18 @@ class BST {
         }
         return visited
     }
+    traverse3(){
+        // The depth first pre-order method
+        let visited = []
+        const transverse = (node)=>{
+            visited.push(node.val)
+            // all the nodes in the left will be traversed b4 heading to the right
+            if(node.left) transverse(node.left)
+            if(node.right) transverse(node.right)
+        }
+        transverse(this.root)
+        return visited
+    }
 }
 
 const myBst = new BST()
@@ -161,9 +173,9 @@ myBst.insert(15)
 myBst.insert(3)
 myBst.insert(8)
 myBst.insert(20)
-
 // console.log(myBst.find(8))
-console.log(myBst.transverse2())
+// console.log(myBst.traverse2())
+console.log(myBst.traverse3())
 
 // insertion - O(logn)
 // search - O(logn)
