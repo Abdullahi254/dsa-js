@@ -175,6 +175,17 @@ class BST {
         traverse(this.root)
         return visited
     }
+    traverse5(){
+        // The depth first in-order method
+        let visited = []
+        const traverse = (node)=>{
+            if(node.left) traverse(node.left)
+            visited.push(node.val)
+            if(node.right) traverse(node.right)
+        }
+        traverse(this.root)
+        return visited
+    }
 }
 
 const myBst = new BST()
@@ -187,7 +198,8 @@ myBst.insert(20)
 // console.log(myBst.find(8))
 // console.log(myBst.traverse2())
 // console.log(myBst.traverse3())
-console.log(myBst.traverse4())
+// console.log(myBst.traverse4())
+console.log(myBst.traverse5())
 
 // insertion - O(logn)
 // search - O(logn)
