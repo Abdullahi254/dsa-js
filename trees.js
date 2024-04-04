@@ -205,3 +205,9 @@ console.log(myBst.traverse5())
 // search - O(logn)
 // as the tree doubles we only increase the number of steps by 1
 // worst case is O(n) 
+
+
+//BREDTH FIRST SEARCH VS DEPTH FIRST SEARCH
+// space complexity in bst could be worse than in depth first.
+// On the other hand they have similar time complexity.
+
