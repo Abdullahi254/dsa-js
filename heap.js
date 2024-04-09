@@ -53,15 +53,14 @@ class MaxBinaryHeap {
                 if (childOne >= childTwo) {
                     this.values[n] = childOne
                     this.values[(2 * n) + 1] = node
-                    node = this.values[(2 * n) + 1]
                     n = (2 * n) + 1
                 }
                 else if (childTwo > childOne) {
                     this.values[n] = childTwo
                     this.values[(2 * n) + 2] = node
-                    node = this.values[(2 * n) + 2]
                     n = (2 * n) + 2
                 }
+                node = this.values[n]
                 childOne = this.values[(2 * n) + 1]
                 childTwo = this.values[(2 * n) + 2]
             }
