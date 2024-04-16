@@ -32,38 +32,40 @@ class MaxBinaryHeap {
     }
     // removing the max element which is the root node and then sorting the heap for every node to be place right
     extractMax() {
-        if (this.values.length < 1) {
-            return this.values[0]
-        } else {
-            //getting the last element
-            let lastElement = this.values[this.values.length - 1]
-
-            // placing the last element to be the root node
-            this.values[0] = lastElement
-            // poping the last element to remove it at the end
-            this.values.pop()
-            // getting the first element to use it when bubbling down to place it in the right place
-            let node = this.values[0]
-
-            let n = 0
-            let childOne = this.values[1]
-            let childTwo = this.values[2]
-            // while node is smaller than either of it's children, continue to bubble it down
-            while (node < childOne || node < childTwo) {
-                if (childOne >= childTwo) {
-                    this.values[n] = childOne
-                    this.values[(2 * n) + 1] = node
-                    n = (2 * n) + 1
+        const max = this.values[0]
+        const end = this.values.pop()
+        this.values[0] = end
+        this.sinkDown()
+        return max
+    }
+    sinkDown() {
+        let idx = 0
+        let leftChilIndex;
+        let rightChilIndex;
+        let rightChild, leftChild;
+        let element = this.values[0]
+        let length = this.values.length
+        let swap = null
+        while (true) {
+            leftChilIndex = (2 * idx) + 1
+            rightChilIndex = (2 * idx) + 2
+            leftChild = this.values[leftChilIndex]
+            rightChild = this.values[rightChilIndex]
+            swap = null
+            if (leftChilIndex < length) {
+                if (leftChild > element) {
+                    swap = leftChilIndex
                 }
-                else if (childTwo > childOne) {
-                    this.values[n] = childTwo
-                    this.values[(2 * n) + 2] = node
-                    n = (2 * n) + 2
-                }
-                node = this.values[n]
-                childOne = this.values[(2 * n) + 1]
-                childTwo = this.values[(2 * n) + 2]
             }
+            if (rightChilIndex < length) {
+                if ((swap === null && rightChild > element) || (swap !== null && rightChild > leftChild)) {
+                    swap = rightChilIndex
+                }
+            }
+            if (swap === null) break
+            this.values[idx] = this.values[swap]
+            this.values[swap] = element
+            idx = swap
         }
     }
     print() {
