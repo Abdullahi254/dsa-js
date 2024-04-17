@@ -53,15 +53,20 @@ class MaxBinaryHeap {
             rightChild = this.values[rightChilIndex]
             swap = null
             if (leftChilIndex < length) {
+                // if the left child is greater than the parent make the switch
                 if (leftChild > element) {
                     swap = leftChilIndex
                 }
             }
             if (rightChilIndex < length) {
+                // if the right child is greater than the parent make the switch only:
+                // if the swap wasn't done earlier with the leftChild
+                // or if the swap was done and the rightchild is greater than the leftchild
                 if ((swap === null && rightChild > element) || (swap !== null && rightChild > leftChild)) {
                     swap = rightChilIndex
                 }
             }
+            // break the loop if swap is not done. Meaning that all the nodes are in their respective position
             if (swap === null) break
             this.values[idx] = this.values[swap]
             this.values[swap] = element
@@ -80,3 +85,8 @@ myHeap.print()
 myHeap.extractMax()
 console.log("AFTER EXTRACTION ***********************")
 myHeap.print()
+
+// BIG(0)
+// insertion O(log N)
+// removal O(log N)
+// search O(N)
