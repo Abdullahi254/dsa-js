@@ -191,6 +191,23 @@ class SingleLinkedList {
             node = next
         }
     }
+    reverse2() {
+        //reversing a linked list recursively
+        const node = this.head
+        this.tail = this.head
+        const recursiveFunct = (node) => {
+            if (node.next == null) {
+                this.head = node
+                return
+            }
+            recursiveFunct(node.next)
+            let q = new Node()
+            q = node.next
+            q.next = node
+            node.next = null
+        }
+        recursiveFunct(node)
+    }
 
     tranverse() {
         let current = this.head
@@ -216,7 +233,7 @@ list.push(3)
 // list.pop()
 // list.pop()
 // list.remove(0)
-list.reverse()
+list.reverse2()
 list.tranverse()
 // console.log(list.head.next.val)
 
