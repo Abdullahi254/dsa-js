@@ -196,10 +196,15 @@ class SingleLinkedList {
         const node = this.head
         this.tail = this.head
         const recursiveFunct = (node) => {
+            // breaking point: If next is null meaning it has reached the end of list 
+            // we make the end element the new head and stop recursion
             if (node.next == null) {
                 this.head = node
                 return
             }
+            // call function again
+            // when it reaches break point: we create a new node in each iteration called q
+            // we make q's next be the previous node and then cut off the next of the node(make it null, preparing it for next iteration)
             recursiveFunct(node.next)
             let q = new Node()
             q = node.next
