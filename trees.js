@@ -49,7 +49,7 @@ class Q {
             this.first = this.first.next
             this.length -= 1
             return node.val
-        }   
+        }
     }
 }
 
@@ -93,6 +93,30 @@ class BST {
             }
         }
     }
+    insertRec(val) {
+        const node = this.root
+        const newNode = new Node(val)
+        if (!this.root) this.root = newNode
+        else {
+            const myRec = (node, newNode) => {
+                if (newNode.val < node.val) {
+                    if (node.left === null) {
+                        node.left = newNode;
+                    } else {
+                        myRec(node.left, newNode);
+                    }
+                } else {
+                    if (node.right === null) {
+                        node.right = newNode;
+                    } else {
+                        myRec(node.right, newNode);
+                    }
+                }
+            }
+            myRec(node, newNode)
+        }
+
+    }
     find(val) {
         let node = this.root
         while (node) {
@@ -103,7 +127,7 @@ class BST {
                 if (node.right) {
                     node = node.right
                 } else return false
-            // check the left
+                // check the left
             } else {
                 if (node.left) {
                     node = node.left
@@ -111,24 +135,24 @@ class BST {
             }
         }
     }
-    traverse(){
+    traverse() {
         // using bredth first method(using array to transverse a BST for demostration purposes)
         let q = [this.root]
         let visited = []
         let node;
-        while(q.length > 0){
+        while (q.length > 0) {
             node = q.shift()
-            if(node.left){
+            if (node.left) {
                 q.push(node.left)
             }
-            if(node.right){
+            if (node.right) {
                 q.push(node.right)
             }
             visited.push(node.val)
         }
         return visited
     }
-    traverse2(){
+    traverse2() {
         // using bredth first method(using queue to transverse a BST)
         let q = new Q()
         //adding first node to queue
@@ -137,14 +161,14 @@ class BST {
         let visited = new Q()
         //declaring node that will be used in the loop to catch each node in each iteration
         let node;
-        while(q.length > 0){
+        while (q.length > 0) {
             // grabing nodes from the queue and decreasing the queue length in each iteration
             node = q.dequeue()
             // if child node exists push it to the queue
-            if(node.left){
+            if (node.left) {
                 q.enqueue(node.left)
             }
-            if(node.right){
+            if (node.right) {
                 q.enqueue(node.right)
             }
             // filling in the nodes in each iteration
@@ -152,36 +176,36 @@ class BST {
         }
         return visited
     }
-    traverse3(){
+    traverse3() {
         // The depth first pre-order method
         let visited = []
-        const transverse = (node)=>{
+        const transverse = (node) => {
             visited.push(node.val)
             // all the nodes in the left will be traversed b4 heading to the right
-            if(node.left) transverse(node.left)
-            if(node.right) transverse(node.right)
+            if (node.left) transverse(node.left)
+            if (node.right) transverse(node.right)
         }
         transverse(this.root)
         return visited
     }
-    traverse4(){
+    traverse4() {
         // The depth first post-order method
         let visited = []
-        const traverse = (node)=>{
-            if(node.left) traverse(node.left)
-            if(node.right) traverse(node.right)
+        const traverse = (node) => {
+            if (node.left) traverse(node.left)
+            if (node.right) traverse(node.right)
             visited.push(node.val)
         }
         traverse(this.root)
         return visited
     }
-    traverse5(){
+    traverse5() {
         // The depth first in-order method
         let visited = []
-        const traverse = (node)=>{
-            if(node.left) traverse(node.left)
+        const traverse = (node) => {
+            if (node.left) traverse(node.left)
             visited.push(node.val)
-            if(node.right) traverse(node.right)
+            if (node.right) traverse(node.right)
         }
         traverse(this.root)
         return visited
@@ -189,22 +213,23 @@ class BST {
 }
 
 const myBst = new BST()
-myBst.insert(10)
-myBst.insert(6)
-myBst.insert(15)
-myBst.insert(3)
-myBst.insert(8)
-myBst.insert(20)
+myBst.insertRec(10)
+myBst.insertRec(6)
+myBst.insertRec(15)
+myBst.insertRec(3)
+myBst.insertRec(8)
+myBst.insertRec(20)
 // console.log(myBst.find(8))
 // console.log(myBst.traverse2())
 // console.log(myBst.traverse3())
 // console.log(myBst.traverse4())
-console.log(myBst.traverse5())
+// console.log(myBst.traverse5())
+console.log(myBst.root)
 
 // insertion - O(logn)
 // search - O(logn)
 // as the tree doubles we only increase the number of steps by 1
-// worst case is O(n) 
+// worst case is O(n)
 
 
 //BREDTH FIRST SEARCH VS DEPTH FIRST SEARCH
