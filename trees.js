@@ -93,6 +93,7 @@ class BST {
             }
         }
     }
+    // inserting a node recursively
     insertRec(val) {
         const node = this.root
         const newNode = new Node(val)
@@ -100,12 +101,14 @@ class BST {
         else {
             const myRec = (node, newNode) => {
                 if (newNode.val < node.val) {
+                    // we look into the left side
                     if (node.left === null) {
                         node.left = newNode;
                     } else {
                         myRec(node.left, newNode);
                     }
                 } else {
+                    // we look into the right side
                     if (node.right === null) {
                         node.right = newNode;
                     } else {
@@ -134,6 +137,27 @@ class BST {
                 } else return false
             }
         }
+    }
+    // finding a node recursively
+    findRec(val) {
+        const node = this.root;
+        const recursiveFunc = (node) => {
+            // if node is null, return false
+            if (!node) return false;
+
+            // if val is found return true
+            if (val === node.val) return true;
+
+            // move to the left
+            if (val < node.val) {
+                return recursiveFunc(node.left);
+            }
+            // move to the right
+            else {
+                return recursiveFunc(node.right);
+            }
+        }
+        return recursiveFunc(node);
     }
     traverse() {
         // using bredth first method(using array to transverse a BST for demostration purposes)
@@ -224,8 +248,8 @@ myBst.insertRec(20)
 // console.log(myBst.traverse3())
 // console.log(myBst.traverse4())
 // console.log(myBst.traverse5())
-console.log(myBst.root)
-
+// console.log(myBst.root)
+console.log(myBst.findRec(20))
 // insertion - O(logn)
 // search - O(logn)
 // as the tree doubles we only increase the number of steps by 1
