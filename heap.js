@@ -17,16 +17,21 @@ class MaxBinaryHeap {
         } else {
             // pushing the element to the list of values
             this.values.push(val)
-            let n = this.values.length - 1
-            let temp
+            // getting index of the last node
+            let i = this.values.length - 1
+            let temp;
+            let parent
             // bubbling up the val to be inserted in the correct index
             // while the child is greater than the parent the loop will continue to iterate
-            while (this.values[n] > this.values[Math.floor((n - 1) / 2)]) {
-                //swaping if the child is greater than the parent
-                temp = this.values[Math.floor((n - 1) / 2)]
-                this.values[Math.floor((n - 1) / 2)] = this.values[n]
-                this.values[n] = temp
-                n = Math.floor((n - 1) / 2)
+            while (i >= 0) {
+                parent = Math.floor((i - 1) / 2)
+                if (this.values[i] > this.values[parent]) {
+                    temp = this.values[parent]
+                    this.values[parent] = this.values[i]
+                    this.values[i] = temp
+                    i = parent
+                }
+                else break
             }
         }
     }
